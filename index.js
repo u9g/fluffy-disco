@@ -35,7 +35,12 @@ client.on('message', async (msg) => {
   } else {
     if (!msg.content.startsWith('?')) return
     if (tags[msg.content.substring(1)]) {
-      msg.channel.send(tags[msg.content.substring(1)])
+      const tag = tags[msg.content.substring(1)]
+      if (tag.type === 'message') {
+        msg.channel.send(tag.message)
+      } else if (tag.type === 'image') {
+        msg.channel.send({ files: [tag.src] })
+      }
     }
   }
 })
