@@ -29,16 +29,13 @@ client.on('message', async (msg) => {
         getTags().then(res => msg.channel.send(res))
         break
       default:
-        msg.channel.send(
-          '* `?tags reload` to reload the tags' +
-         '\n* `?tags list` to list all tags' +
-          '\n* `?[tag]` to use a tag')
+        msg.channel.send(tags.help)
         break
     }
   } else {
     if (!msg.content.startsWith('?')) return
     if (tags[msg.content.substring(1)]) {
-      msg.channel.send(tags[msg.content.substring(1)].message)
+      msg.channel.send(tags[msg.content.substring(1)])
     }
   }
 })
